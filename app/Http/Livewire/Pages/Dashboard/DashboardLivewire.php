@@ -2,16 +2,13 @@
 
 namespace App\Http\Livewire\Pages\Dashboard;
 
-<<<<<<< HEAD
 use App\Events\testEvent;
-use Livewire\Attributes\On;
-use Jantinnerezo\LivewireAlert\LivewireAlert;
-=======
 use App\Models\Device;
 use App\Models\DeviceVehicle;
 use App\Models\Organisation;
 use App\Models\User;
->>>>>>> d25353486e3f7fb4eca04d7351bf62d21ab865c5
+use Livewire\Attributes\On;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 
 class DashboardLivewire extends Component
