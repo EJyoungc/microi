@@ -1,4 +1,5 @@
 <?php
+use Illuminate\Http\Request;
 
 use App\Http\Controllers\LandingController;
 use App\Http\Livewire\Pages\Devices\DeviceLivewire;
@@ -17,7 +18,9 @@ use App\Http\Livewire\Pages\Vehicles\AllVehiclesLivewire;
 use App\Http\Livewire\Pages\Vehicles\VehicleLivewire;
 use App\Http\Livewire\Pages\Vehicles\VehiclesLivewire;
 use App\Http\Livewire\Pages\Pansika\PansikaLivewire;
+
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +37,87 @@ Route::get(
     '/',
     [LandingController::class, 'index']
 )->name('landing');
+
+
+Route::post('/location/{deviceId}', function (Request $request, $deviceId) {
+
+    // Append the new GPS data
+    $locations = [
+        'device_id' => $deviceId,
+        'latitude' => (float) $request->latitude,
+        'longitude' => (float) $request->longitude,
+        'timestamp' => now()->toDateTimeString(),
+    ];
+
+    $jsonData = json_encode($locations);
+    // Save the updated data back to the JSON file
+    Storage::disk('public')->append('location-log.json', $jsonData);
+
+
+    return response()->json([
+        'message' => 'Location saved successfully!',
+        'data' => $locations,
+    ]);
+});
+
+
+Route::get('/test', function (Request $request) {
+    return response()->json([
+        'message' => 'Location saved successfully!',
+    ]);
+});
+
+Route::get('/location/{deviceId}', function (Request $request, $deviceId) {
+
+    // Append the new GPS data
+    $locations = [
+        'device_id' => $deviceId,
+        'latitude' => (float) $request->latitude,
+        'longitude' => (float) $request->longitude,
+        'timestamp' => now()->toDateTimeString(),
+    ];
+
+    $jsonData = json_encode($locations);
+    // Save the updated data back to the JSON file
+    Storage::disk('public')->append('location-log.json', $jsonData);
+
+
+    return response()->json([
+        'message' => 'Location saved successfully!',
+        'data' => $locations,
+    ]);
+});
+
+
+Route::get('/location/{device_id}/{latitude}/{longitude}', function (Request $request, $latitude, $longitude) {
+    // Validate the coordinates
+    if (!is_numeric($latitude) || !is_numeric($longitude)) {
+        return response()->json(['message' => 'Invalid coordinates provided.'], 422);
+    }
+
+
+
+
+    // Append the new GPS data
+    $locations = [
+        'device_id' => $request->device_id,
+        'latitude' => (float) $request->latitude,
+        'longitude' => (float) $request->longitude,
+        'timestamp' => now()->toDateTimeString(),
+    ];
+
+    $jsonData = json_encode($locations);
+    // Save the updated data back to the JSON file
+    Storage::disk('public')->append('location-log.json', $jsonData);
+
+
+    return response()->json([
+        'message' => 'Location saved successfully!',
+        'data' => $locations,
+    ]);
+});
+
+
 
  Route::get('/pansika', PansikaLivewire::class)->name('pansika');
 
