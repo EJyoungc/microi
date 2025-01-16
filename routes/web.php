@@ -62,9 +62,7 @@ Route::post('/location/{deviceId}', function (Request $request, $deviceId) {
 
 
 Route::get('/test', function (Request $request) {
-    return response()->json([
-        'message' => 'Location saved successfully!',
-    ], 200);
+    echo "200";
 });
 
 Route::get('/location/{deviceId}', function (Request $request, $deviceId) {
