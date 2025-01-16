@@ -36,6 +36,27 @@ Route::post('/location/{deviceId}', function (Request $request, $deviceId) {
     ]);
 });
 
+Route::get('/location/{deviceId}', function (Request $request, $deviceId) {
+
+    // Append the new GPS data
+    $locations = [
+        'device_id' => $deviceId,
+        'latitude' => (float) $request->latitude,
+        'longitude' => (float) $request->longitude,
+        'timestamp' => now()->toDateTimeString(),
+    ];
+
+    $jsonData = json_encode($locations);
+    // Save the updated data back to the JSON file
+    Storage::disk('public')->append('location-log.json', $jsonData);
+
+
+    return response()->json([
+        'message' => 'Location saved successfully!',
+        'data' => $locations,
+    ]);
+});
+
 
 Route::get('/location/{device_id}/{latitude}/{longitude}', function (Request $request, $latitude, $longitude) {
     // Validate the coordinates
