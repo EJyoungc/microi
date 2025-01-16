@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Storage;
 |
 */
 
-Route::post('/api/location/{deviceId}', function (Request $request, $deviceId) {
+Route::post('/location/{deviceId}', function (Request $request, $deviceId) {
 
     // Append the new GPS data
     $locations = [
