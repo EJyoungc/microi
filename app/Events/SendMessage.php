@@ -11,7 +11,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class testEvent implements ShouldBroadcastNow 
+class SendMessage implements ShouldBroadcastNow 
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -20,11 +20,11 @@ class testEvent implements ShouldBroadcastNow
     /**
      * Create a new event instance.
      */
-    public function __construct(string $message)
+    public function __construct(string $message = null)
     {
         //
 
-     $this->message = $message;
+        $this->message = $message;
     }
 
     /**
@@ -35,9 +35,8 @@ class testEvent implements ShouldBroadcastNow
     public function broadcastOn(): array
     {
         return [
-
-            new Channel('gps-data'),
             // new PrivateChannel('channel-name'),
+            new Channel('send-message'),
         ];
     }
 }

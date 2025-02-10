@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Pages\Dashboard;
 
+use App\Events\SendMessage;
 use App\Events\testEvent;
 use App\Models\Device;
 use App\Models\DeviceVehicle;
@@ -18,14 +19,18 @@ class DashboardLivewire extends Component
 
     public function send(){
 
-        event(new testEvent($this->text));
+        // event(new testEvent($this->text));
+        event(new SendMessage($this->text));
+        // dd('working');
         // $this->echo($this->text);
         // dd($this->text);
 
     }
 
-    #[On('echo:gps-data,testEvent')]
+    #[On('echo:send-message,SendMessage')]
     public function echo($data){
+
+        dd($data);
         $this->alert('success', 'Data Recieved');
     }
 

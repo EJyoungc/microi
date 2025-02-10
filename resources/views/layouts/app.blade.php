@@ -19,13 +19,26 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css') }}">
     <link rel="stylesheet" href="{{ asset('plugins/sweetalert2/sweetalert2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('leaflet/leaflet.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css" />
+
+    <!-- Leaflet.LocateControl CSS -->
+    <link rel="stylesheet" href="{{ asset('leaflet/plugins/L.Control.Locate.min.css') }}" />
+
+    <!-- Leaflet.Measure CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet-measure/3.3.0/leaflet-measure.css" />
+
     <script src="{{ asset('leaflet/leaflet.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js"></script>
+    <!-- Leaflet.LocateControl JS -->
+    <script src="{{ asset('leaflet/plugins/L.Control.Locate.min.js') }}"></script>
+    <!-- Leaflet.Measure JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-measure/3.3.0/leaflet-measure.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<style>
-.chart-container {
-  max-width: 100%;
-}
-</style>
+    <style>
+        .chart-container {
+            max-width: 100%;
+        }
+    </style>
     <!-- Theme style -->
 
 </head>
@@ -40,9 +53,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- Main Sidebar Container -->
         @livewire('layout.aside.left-nav-livewire')
         <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper"
-            {{-- style="background-image: url('{{ asset('landing page/images/greenAfrican.jpg') }}'); background-size:cover; overflow:visible;"> --}}
-            <!-- Content Header (Page header) -->
+        <div class="content-wrapper" {{-- style="background-image: url('{{ asset('landing page/images/greenAfrican.jpg') }}'); background-size:cover; overflow:visible;"> --}} <!-- Content Header (Page header) -->
             {{ $slot }}
             <!-- /.content -->
         </div>
@@ -76,25 +87,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- AdminLTE App -->
     <script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
 
-<<<<<<< HEAD
-    <script src="{{ asset('build/assets/app-CgOreXmT.js') }}" ></script>
-    <script src="{{ asset('build/assets/app-l0sNRNKZ.js') }}" ></script>
+    <script src="{{ asset('build/assets/app-Cc9d-OLG.js') }}"></script>
+    {{-- <script src="{{ asset('build/assets/app-l0sNRNKZ.js') }}" ></script> --}}
+
+
 
     {{-- mapscripts --}}
-=======
-    {{-- for the knobs --}}
-    <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
-
-    <!-- jQuery Knob -->
-    <script src="{{ asset('plugins/jquery-knob/jquery.knob.min.js') }}"></script>
-    <!-- Sparkline -->
-    <script src="{{ asset('plugins/sparklines/sparkline.js') }}"></script>
-    <!-- AdminLTE for demo purposes -->
-
-
-
-
->>>>>>> d25353486e3f7fb4eca04d7351bf62d21ab865c5
     <script>
         function updatemap(lat, long, text = '') {
             // console.log('hello');
@@ -105,10 +103,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 .bindPopup(txt + "</br>" + "<span>" + lat + " , " + long + "</span>")
                 .openPopup();
         }
-        var map = L.map('map').setView([15, 00, 30.00], 13);
+        var map = L.map('map').setView([-15.81368, 35.006646], 13);
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.google.com/copyright">Techlink</a>'
         }).addTo(map);
+        L.marker([-15.81368, 35.006646]).addTo(map).bindPopup('You are here').openPopup();
 
         function onMapClick(e) {
             alert("You clicked the map at " + e.latlng);
@@ -128,8 +127,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     // lat: -15.812474,
                     // lng: 35.070662
 
-                    lat: 52.5159,
-                    lng: 13.3777
+                    lat: -15.81368,
+                    lng: 35.006646
 
                 },
                 zoom: 4,
@@ -148,45 +147,44 @@ scratch. This page gets rid of all links and provides the needed markup only.
             });
 
             map.setCenter({
-                // lat: 52.5159,
-                // lng: 13.3777
+                        // lat: 52.5159,
+                        // lng: 13.3777
 
-                lat: -15.812474,
-                lng: 35.070662
-            });
-            // map.setZoom(14);
+                        lat: -15.81368,
+                        lng: 35.006646
+                        // map.setZoom(14);
 
-            map.addObject(currentlocation)
-            // map.addObject(currentlocation1)
-            // map.addObject(currentlocation2)
-        }
+                        map.addObject(currentlocation)
+                        // map.addObject(currentlocation1)
+                        // map.addObject(currentlocation2)
+                    }
 
-        function view(longi, lati) {
-            // console.log(longi,lati);
-            // alert(longi+" "+lati );
-            var location = new H.map.Marker({
-                lat: lati,
-                lng: longi
-            });
-            map.addObject(location);
-            map.setCenter({
-                lat: lati,
-                lng: longi
-            });
-        }
+                    function view(longi, lati) {
+                        // console.log(longi,lati);
+                        // alert(longi+" "+lati );
+                        var location = new H.map.Marker({
+                            lat: lati,
+                            lng: longi
+                        });
+                        map.addObject(location);
+                        map.setCenter({
+                            lat: lati,
+                            lng: longi
+                        });
+                    }
 
-        //Step 3: make the map interactive
-        // MapEvents enables the event system
-        // Behavior implements default interactions for pan/zoom (also on mobile touch environments)
-        var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
+                    //Step 3: make the map interactive
+                    // MapEvents enables the event system
+                    // Behavior implements default interactions for pan/zoom (also on mobile touch environments)
+                    var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
 
-        // Create the default UI components
-        var ui = H.ui.UI.createDefault(map, defaultLayers);
+                    // Create the default UI components
+                    var ui = H.ui.UI.createDefault(map, defaultLayers);
 
-        // Now use the map as required...
-        window.onload = function() {
-            // addMarkersToMap(map);
-        }
+                    // Now use the map as required...
+                    window.onload = function() {
+                        // addMarkersToMap(map);
+                    }
     </script>
     <script>
         $(function() {
@@ -467,10 +465,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
         new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: ['January', 'Febraury', 'March', 'Appril', 'May', 'June', 'July', 'August', 'October', 'November', 'December'],
+                labels: ['January', 'Febraury', 'March', 'Appril', 'May', 'June', 'July', 'August', 'October',
+                    'November', 'December'
+                ],
                 datasets: [{
                     label: '# of Vehicle Registration',
-                    data: [12, 19, 3, 5, 2, 3,10,14,18,22,30],
+                    data: [12, 19, 3, 5, 2, 3, 10, 14, 18, 22, 30],
                     borderWidth: 1
                 }]
             },

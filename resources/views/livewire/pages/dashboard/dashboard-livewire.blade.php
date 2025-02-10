@@ -27,7 +27,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <input type="text" class="form-group" wire:model='text' >
-                                <button wire:click='send' class="btn btn-dark" >test </button>
+                                <button wire:click.prevent='send' class="btn btn-dark" >test </button>
                             </div>
                         </div>
                     </div>
@@ -99,6 +99,8 @@
                 <!-- /.row -->
                 <div class="row">
                     <!-- Left col -->
+
+
                     <section class="col-lg-6 connectedSortable ui-sortable">
                         <!-- Custom tabs (Charts with tabs)-->
                         <div class="card ">
@@ -119,10 +121,14 @@
                     </section>
                     <!-- /.Left col -->
                     <!-- right col (We are only adding the ID to make the widgets sortable)-->
-                    <section class="col-lg-6 connectedSortable ui-sortable">
+                    <section class="col-lg-6 col-12 connectedSortable ui-sortable">
 
                         <!-- Map card -->
                         <div class="card">
+                            <x-modal title="map" status="{{ true }}" >
+
+                                <livewire:maps.maps-component-livewire>
+                            </x-modal>
                             <div class="card-header border-0 ui-sortable-handle" style="cursor: move;">
                                 <h3 class="card-title">
                                     <i class="fas fa-map-marker-alt mr-1"></i>
