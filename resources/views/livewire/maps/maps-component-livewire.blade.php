@@ -89,7 +89,8 @@
       position: 'topright',
       drawCircle: false,
       follow: true,
-      setView: 'once',
+      setView: 'always',
+      flyTo:true,
       keepCurrentZoomLevel: true,
       markerStyle: {
         weight: 1,
