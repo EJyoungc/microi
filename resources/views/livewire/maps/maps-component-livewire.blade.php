@@ -93,8 +93,8 @@
       keepCurrentZoomLevel: true,
       markerStyle: {
         weight: 1,
-        opacity: 0.8,
-        fillOpacity: 0.3
+        opacity: 1.0,
+        fillOpacity: 1.0
       },
       circleStyle: {
         weight: 1,
